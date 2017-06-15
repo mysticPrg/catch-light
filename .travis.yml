@@ -1,11 +1,11 @@
 language: node_js
 node_js:
-  - "8.1.1"
+	- "8.1.1"
 
-before_script:
-  - npm install -g yarn
-  - yarn install
+install:
+	- yarn install
 
-script: yarn run coverage
+script:
+	- yarn run coverage
 
 # after_success:
