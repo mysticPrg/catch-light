@@ -4,7 +4,8 @@ languages:
 
 exclude_paths:
   - "config/**/*"
-  - "script/*"
+  - "config/*"
+  - "scripts/*"
   - "package.json"
   - "Readme.md"
   - "Dockerfile"
