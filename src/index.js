@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 
 import App from './containers/App';
 import reducer from './reducers'
-import { init_app } from './actions';
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -18,7 +17,7 @@ ReactDOM.render(
     , document.getElementById('root')
 );
 
-store.dispatch(init_app());
+// import { init_app } from './actions';
+// setTimeout(() => {store.dispatch(init_app());}, 2000);
 
 registerServiceWorker();
-
