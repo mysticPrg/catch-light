@@ -1,9 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+import App from './containers/App';
+import reducer from './reducers'
+import { init_app } from './actions';
+
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = createStore(reducer);
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+    , document.getElementById('root')
+);
+
+store.dispatch(init_app());
+
 registerServiceWorker();
 
-// https://catch-light-mysticprg.c9users.io/

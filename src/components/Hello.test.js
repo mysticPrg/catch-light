@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import App from './App';
+import Hello from './Hello';
 
-describe('App', () => {
+describe('Hello', () => {
 	it('should be render without error', () => {
 		expect(() => {
-			shallow(<App/>);
+			shallow(<Hello/>);
 		}).not.toThrow();
 	});
 });
