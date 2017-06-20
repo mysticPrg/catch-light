@@ -14,7 +14,7 @@ describe('FlyLight', () => {
        const count = 10;
        const flyLight = shallow(<FlyLight count={count}/>);
        
-       const realCount = flyLight.find('.light').length;
+       const realCount = flyLight.find('[data-test="light"]').length;
        expect(realCount).toEqual(count);
    });
 });
