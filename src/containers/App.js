@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { init_app } from '../actions';
+import { init_app_request } from '../actions';
 import Hello from '../components/Hello';
 
 class App extends Component {
@@ -20,7 +20,7 @@ const stateToProps = state => ({
 });
 
 const actionToProps = (dispatch, action) => ({
-    onClick: () => dispatch(init_app())
+    onClick: () => dispatch(init_app_request())
 });
 
 export default connect(stateToProps, actionToProps)(App);

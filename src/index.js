@@ -1,14 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import App from './containers/App';
-import reducer from './reducers'
-
+import reducer from './reducers';
+import sagas from './sagas';
 import registerServiceWorker from './registerServiceWorker';
 
-const store = createStore(reducer);
+const saga = createSagaMiddleware();
+const store = createStore(
+    reducer,
+    composeWithDevTools(applyMiddleware(saga))
+);
 
 ReactDOM.render(
     <Provider store={store}>
@@ -17,7 +24,6 @@ ReactDOM.render(
     , document.getElementById('root')
 );
 
-// import { init_app } from './actions';
-// setTimeout(() => {store.dispatch(init_app());}, 2000);
+saga.run(sagas);
 
 registerServiceWorker();
