@@ -69,6 +69,7 @@ describe('Light', () => {
 
 		const error_min = -1;
 		const error_max = 1001;
+		errSpy.calls.reset();
 		shallow(
 			<Light
 				x-min={error_min}
@@ -79,7 +80,7 @@ describe('Light', () => {
 		);
 		expect(errSpy).toHaveBeenCalled();
 
-		errSpy.calls.reset()
+		errSpy.calls.reset();
 		const not_number_value = 'not a number';
 		shallow(
 			<Light
