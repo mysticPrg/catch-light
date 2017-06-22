@@ -43,10 +43,10 @@ describe('Light', () => {
 		const x_pos = parseInt(px_filter.exec(style.left)[1]);
 		const y_pos = parseInt(px_filter.exec(style.top)[1]);
 
-		expect(x_pos).toBeGreaterThan(x_min);
+		expect(x_pos).toBeGreaterThanOrEqual(x_min);
 		expect(x_pos).toBeLessThan(x_max);
 
-		expect(y_pos).toBeGreaterThan(y_min);
+		expect(y_pos).toBeGreaterThanOrEqual(y_min);
 		expect(y_pos).toBeLessThan(y_max);
 	});
 
