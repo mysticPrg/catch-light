@@ -1,21 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-function getRandomNumber(min, max) {
-	return min + Math.floor(Math.random() * (max-min));
-}
+import { getRandomNumber } from '~/utils/common';
+import { rangeCheck } from '~/utils/propTypeChecker';
 
-function rangeCheck(props, propName) {
-	const value = parseInt(props[propName]);
-
-	if ( isNaN(value) ) {
-		return new Error('Property value is not a number.');
-	}
-
-	if ( value < 0 || value > 1000 ) {
-		throw new Error('Pos range is 0 to 1000.');
-	}
-}
+const rangeCheck0to1000 = rangeCheck(0, 1000);
 
 class Light extends Component {
 	constructor(props) {
@@ -49,10 +38,10 @@ Light.defaultProps = {
 };
 
 Light.propTypes = {
-	'x-min': rangeCheck,
-	'x-max': rangeCheck,
-	'y-min': rangeCheck,
-	'y-max': rangeCheck
+	'x-min': rangeCheck0to1000,
+	'x-max': rangeCheck0to1000,
+	'y-min': rangeCheck0to1000,
+	'y-max': rangeCheck0to1000
 };
 
 export default Light;
