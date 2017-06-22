@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Light from './Light';
-
 /*
 	여러가지 크기/색상으로 그려져야 함
 	모양은 모두 동그라미
