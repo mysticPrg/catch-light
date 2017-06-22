@@ -4,7 +4,7 @@ import * as action from '../actions';
 
 import FakeServer from '../utils/fakeServer';
 
-function* initApp() {
+export function* initApp() {
     yield put(action.in_progress());
     
     const result = yield call(FakeServer.init_request);
