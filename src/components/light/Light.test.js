@@ -50,6 +50,34 @@ describe('Light', () => {
 		expect(y_pos).toBeLessThan(y_max);
 	});
 
+	it('x-min should be less than x-max', () => {
+		const min = 10;
+		const max = 5;
+		
+		const errSpy = spyOn(console, 'error');
+		shallow(
+			<Light
+				x-min={min}
+				x-max={max}
+			/>
+		);
+		expect(errSpy).toHaveBeenCalled();
+	});
+
+	it.skip('y-min should be less than y-max', () => {
+		const min = 10;
+		const max = 5;
+		
+		const errSpy = spyOn(console, 'error');
+		shallow(
+			<Light
+				y-min={min}
+				y-max={max}
+			/>
+		);
+		expect(errSpy).toHaveBeenCalled();
+	});
+
 	it('x and y range is 0 to 1000', () => {
 		const min = 0;
 		const max = 1000;
