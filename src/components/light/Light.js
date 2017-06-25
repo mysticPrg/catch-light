@@ -26,8 +26,14 @@ class Light extends Component {
 	render() {
 		const style = {
 			left: `${this.state.x}px`,
-			top: `${this.state.y}px`
-		}
+			top: `${this.state.y}px`,
+			backgroundColor: this.props.color,
+			width: `${this.props.size}px`,
+			height: `${this.props.size}px`,
+			opacity: this.props.alpha,
+			borderRadius: '50%'
+		};
+
 		return (
 			<div
 				style={style}
@@ -41,7 +47,11 @@ Light.defaultProps = {
 	'x-min': 0,
 	'x-max': 1,
 	'y-min': 0,
-	'y-max': 1
+	'y-max': 1,
+
+	color: '#FFFFFF',
+	size: 10,
+	alpha: 1.0
 };
 
 Light.propTypes = {

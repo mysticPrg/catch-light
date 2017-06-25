@@ -3,8 +3,6 @@ import { shallow } from 'enzyme';
 
 import Light from './Light';
 /*
-	여러가지 크기/색상으로 그려져야 함
-	모양은 모두 동그라미
 	주어진 target x/y로 이동해야 함 (부드럽게)
 	나타날 때, 사라질 때는 서서히.. (alpha값 이용해서)
 	animate 함수를 한 번 호출할 때마다 위 과정이 처리돼야 함
@@ -119,5 +117,58 @@ describe('Light', () => {
 			/>
 		);
 		expect(errSpy).toHaveBeenCalled();
+	});
+
+	it('should be show given color', () => {
+		const color = '#FF0000';
+		const light = shallow(
+			<Light
+				color={color}
+			/>
+		);
+
+		const result = light.find('[data-test="light"]').props().style['backgroundColor'];
+		expect(result).toEqual(color);
+	});
+
+	it('should be show given size', () => {
+		const size = 100;
+		const light = shallow(
+			<Light
+				size={size}
+			/>
+		);
+
+		const style = light.find('[data-test="light"]').props().style;
+		const width = style.width;
+		const height = style.height;
+
+		expect(width).toEqual(`${size}px`);
+		expect(height).toEqual(`${size}px`);
+	});
+
+	it('should be show given alpha', () => {
+		const alpha = 0.5;
+		const light = shallow(
+			<Light
+				alpha={alpha}
+			/>
+		);
+
+		const style = light.find('[data-test="light"]').props().style;
+		const result = style.opacity;
+
+		expect(result).toEqual(alpha);
+	});
+
+	it('should be show circle shape', () => {
+		const light = shallow(
+			<Light/>
+		);
+
+		const style = light.find('[data-test="light"]').props().style;
+		const result = style.borderRadius;
+
+		expect(result).toEqual('50%');
 	});
 });
