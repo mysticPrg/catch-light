@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import PropTypes from 'prop-types';
 
 import Light from './Light';
 /*
