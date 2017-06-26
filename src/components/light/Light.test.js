@@ -5,20 +5,13 @@ import Light from './Light';
 /*
 	최대 30개까지 만들 수 있고 독립적으로 동작할 수 있어야 함
 	최소 1/(30*2)초 안에 30개 모두의 연산이 끝나야 함
+	clickable
 	error check..
 */
 
 jest.useRealTimers();
 
 describe('Light', () => {
-
-	beforeEach(function() {
-		// jasmine.clock().install();
-	});
-
-	afterEach(function() {
-		// jasmine.clock().uninstall();
-	});
 
 	it('should be render without crash', () => {
 		expect(() => {
@@ -249,6 +242,8 @@ describe('Light', () => {
 			curDist = getDist(target);
 			expect(curDist.x).toBeLessThan(prevDist.x);
 			expect(curDist.y).toBeLessThan(prevDist.y);
+
+			light.unmount();
 		});
 
 		return promise;
