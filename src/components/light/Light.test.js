@@ -1,17 +1,25 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import Light from './Light';
 /*
-	주어진 target x/y로 이동해야 함 (부드럽게)
-	나타날 때, 사라질 때는 서서히.. (alpha값 이용해서)
-	animate 함수를 한 번 호출할 때마다 위 과정이 처리돼야 함
 	최대 30개까지 만들 수 있고 독립적으로 동작할 수 있어야 함
 	최소 1/(30*2)초 안에 30개 모두의 연산이 끝나야 함
 	error check..
 */
 
+jest.useRealTimers();
+
 describe('Light', () => {
+
+	beforeEach(function() {
+		// jasmine.clock().install();
+	});
+
+	afterEach(function() {
+		// jasmine.clock().uninstall();
+	});
+
 	it('should be render without crash', () => {
 		expect(() => {
 			shallow(<Light/>);
@@ -147,18 +155,32 @@ describe('Light', () => {
 		expect(height).toEqual(`${size}px`);
 	});
 
-	it('should be show given alpha', () => {
+	it('should be show given alpha with animate', () => {
 		const alpha = 0.5;
-		const light = shallow(
+		let loopCount = 0;
+		const onAnimate = jasmine.createSpy(() => loopCount++);
+		const light = mount(
 			<Light
 				alpha={alpha}
+				onAnimate={onAnimate}
 			/>
 		);
 
-		const style = light.find('[data-test="light"]').props().style;
-		const result = style.opacity;
+		let style = light.find('[data-test="light"]').props().style;
+		let result = style.opacity;
+		expect(onAnimate).not.toBeCalled();
+		expect(result).toEqual(0);
 
-		expect(result).toEqual(alpha);
+		return new Promise(resolve => {
+			setTimeout(resolve, 1000);
+		}).then(() => {
+			expect(onAnimate).toBeCalled();
+			style = light.find('[data-test="light"]').props().style;
+			result = style.opacity;
+			expect(result).toEqual(alpha);
+
+			light.unmount();
+		});
 	});
 
 	it('should be show circle shape', () => {
@@ -173,26 +195,12 @@ describe('Light', () => {
 	});
 	
 	it('Each time animate is called, it must be close to the target', () => {
-		let animate;
-		const getAnimateCallback = (cb) => {animate = cb;};
 		const target = {
 			x: 100,
 			y: 100
 		};
 		const min = 0;
 		const max = 500;
-		
-		const light = shallow(
-			<Light
-				getAnimateCallback={getAnimateCallback}
-				target-x={target.x}
-				target-y={target.y}
-				x-min={min}
-				y-min={min}
-				x-max={max}
-				y-max={max}
-			/>
-		);
 		const repeatCount = 30;
 		
 		const getPos = () => {
@@ -206,16 +214,43 @@ describe('Light', () => {
 			x: Math.abs(target.x*target.x - pos.x*pos.x),
 			y: Math.abs(target.y*target.y - pos.y*pos.y)
 		});
+
+		let repeat = 0;
+		let onAnimate = null;
+		const promise = new Promise(resolve => {
+			onAnimate = () => {
+				if ( repeat < repeatCount ) {
+					curDist = getDist(target);
+					expect(curDist.x).toBeLessThan(prevDist.x);
+					expect(curDist.y).toBeLessThan(prevDist.y);
+					repeat++;
+				} else {
+					resolve();
+				}
+			};
+		});
 		
+		const light = mount(
+			<Light
+				onAnimate={onAnimate}
+				target-x={target.x}
+				target-y={target.y}
+				x-min={min}
+				y-min={min}
+				x-max={max}
+				y-max={max}
+			/>
+		);
+
 		let prevDist = getDist(target);
 		let curDist = null;
 
-		for (let i=0 ; i<repeatCount ; i++ ) {
-			
-			animate();
+		promise.then(() => {
 			curDist = getDist(target);
 			expect(curDist.x).toBeLessThan(prevDist.x);
 			expect(curDist.y).toBeLessThan(prevDist.y);
-		}
+		});
+
+		return promise;
 	});
 });

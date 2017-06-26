@@ -23,6 +23,9 @@ import Light from '../src/components/light/Light';
 storiesOf('Light', module).add('Basic', () => {
   const min = 0;
   const max = 200;
+  let animate;
+  const getAnimateCallback = callback => (animate = callback);
+
   return (
     <Light
       color="#FF0000"
@@ -32,6 +35,13 @@ storiesOf('Light', module).add('Basic', () => {
       x-max={max}
       y-min={min}
       y-max={max}
+      getAnimateCallback={getAnimateCallback}
     />
   );
+
+  setInterval(() => {
+    if ( animate ) {
+      animate();
+    }
+  }, 500);
 });
