@@ -16,8 +16,6 @@ const compareWithMax = (min, max, component) => {
 const compareCheckerForXmin = combineChecker(rangeCheck0to1000, compareWithOtherProps('x-max', compareWithMax));
 const compareCheckerForYmin = combineChecker(rangeCheck0to1000, compareWithOtherProps('y-max', compareWithMax));
 
-const alphaAddFactor = 1.0 / 29.9;
-
 class Light extends Component {
 	constructor(props) {
 		super(props);
@@ -29,13 +27,14 @@ class Light extends Component {
 		};
 
 		this.onClick = this.onClick.bind(this);
+		this.alphaAddFactor = 1.0 / (this.props.fps - 0.01);
 	}
 
 	componentDidMount() {
 		this.intervalKey = setInterval(() => {
 			this.animate();
 			this.props.onAnimate();
-		}, 1000/30);
+		}, 1000/this.props.fps);
 	}
 
 	componentWillUnmount() {
@@ -47,7 +46,7 @@ class Light extends Component {
 		const x = this.state.x;
 		const y = this.state.y;
 		const next = {
-			alpha: this.state.alpha + alphaAddFactor,
+			alpha: this.state.alpha + this.alphaAddFactor,
 			x: x + speed * (this.props['target-x'] - x),
 			y: y + speed * (this.props['target-y'] - y)
 		};
@@ -76,7 +75,8 @@ class Light extends Component {
 			width: `${this.props.size}px`,
 			height: `${this.props.size}px`,
 			opacity: this.state.alpha,
-			borderRadius: '50%'
+			borderRadius: '50%',
+			cursor: 'pointer'
 		};
 
 		return (
@@ -98,6 +98,7 @@ Light.defaultProps = {
 	color: '#FFFFFF',
 	size: 10,
 	alpha: 1.0,
+	fps: 30,
 	
 	'target-x': 0,
 	'target-y': 0,

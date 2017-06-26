@@ -5,14 +5,13 @@ import Light from './Light';
 /*
 	최대 30개까지 만들 수 있고 독립적으로 동작할 수 있어야 함
 	최소 1/(30*2)초 안에 30개 모두의 연산이 끝나야 함
-	set fps
 	error check..
 */
 
 jest.useRealTimers();
 
-describe.only('Light', () => {
-	it('should be render without crash', () => {
+describe('Light', () => {
+	it('should be rendered without crash', () => {
 		expect(() => {
 			shallow(<Light/>);
 		}).not.toThrow();
@@ -30,6 +29,27 @@ describe.only('Light', () => {
 		light.simulate('click');
 
 		expect(onClick).toBeCalled();
+	});
+
+	it('should be animated with given fps', () => {
+		const fps = 20;
+		const onAnimate = jasmine.createSpy();
+
+		const light = mount(
+			<Light 
+				fps={fps}
+				onAnimate={onAnimate}
+			/>
+		);
+
+		const promise = new Promise(resolve => setTimeout(resolve, 1050));
+
+		promise.then(() => {
+			expect(onAnimate.calls.count()).toBeGreaterThanOrEqual(fps);
+			light.unmount();
+		});
+
+		return promise;
 	});
 });
 
@@ -269,5 +289,16 @@ describe('Light shape', () => {
 		const result = style.borderRadius;
 
 		expect(result).toEqual('50%');
+	});
+
+	it.only('mouse cursor should be change to hand when hover', () => {
+		const light = shallow(
+			<Light/>
+		);
+
+		const style = light.find('[data-test="light"]').props().style;
+		const result = style.cursor;
+
+		expect(result).toEqual('pointer');
 	});
 });
