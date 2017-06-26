@@ -95,9 +95,12 @@
       "react-app"
     ],
     "plugins": [
-      ["babel-plugin-root-import", {
-	      "rootPathSuffix": "src/"
-	    }]
+      [
+        "babel-plugin-root-import",
+        {
+          "rootPathSuffix": "src/"
+        }
+      ]
     ]
   },
   "eslintConfig": {

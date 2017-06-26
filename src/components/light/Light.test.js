@@ -291,7 +291,7 @@ describe('Light shape', () => {
 		expect(result).toEqual('50%');
 	});
 
-	it.only('mouse cursor should be change to hand when hover', () => {
+	it('mouse cursor should be change to hand when hover', () => {
 		const light = shallow(
 			<Light/>
 		);
