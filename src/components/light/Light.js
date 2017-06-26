@@ -7,9 +7,10 @@ import { getRandomNumber } from '../../utils/common';
 import { combineChecker, rangeCheck, compareWithOtherProps } from '../../utils/propTypeChecker';
 
 const rangeCheck0to1000 = rangeCheck(0, 1000);
-const compareWithMax = (min, max) => {
-	if ( min >= max ) {
-		return new Error('Min is greater than max.');
+let count = 0;
+const compareWithMax = (min, max, component) => {
+	if ( min > max ) {
+		return new Error(`${component}: Min(${min}) is greater than max(${max}).`);
 	}
 };
 const compareCheckerForXmin = combineChecker(rangeCheck0to1000, compareWithOtherProps('x-max', compareWithMax));

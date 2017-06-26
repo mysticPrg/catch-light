@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import PropTypes from 'prop-types';
 
 import Light from './Light';
 /*
@@ -12,6 +13,10 @@ import Light from './Light';
 jest.useRealTimers();
 
 describe('Light', () => {
+
+	beforeEach(() => {
+		Light.displayName = Math.random().toString();
+	});
 
 	it('should be render without crash', () => {
 		expect(() => {
@@ -63,7 +68,7 @@ describe('Light', () => {
 		expect(errSpy).toHaveBeenCalled();
 	});
 
-	it.skip('y-min should be less than y-max', () => {
+	it('y-min should be less than y-max', () => {
 		const min = 10;
 		const max = 5;
 		

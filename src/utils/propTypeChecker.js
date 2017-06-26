@@ -53,10 +53,10 @@ export function compareWithOtherProps(otherPropName, compareFunc) {
 		throw new Error('compareFunc must be string');
 	}
 
-	return (props, propName) => {
+	return (props, propName, component, location) => {
 		const value = props[propName];
 		const otherValue = props[otherPropName];
 
-		return compareFunc(value, otherValue);
+		return compareFunc(value, otherValue, component, location);
 	};
 }
