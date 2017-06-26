@@ -27,13 +27,15 @@ class Light extends Component {
 			y: getRandomNumber(props['y-min'], props['y-max']),
 			alpha: 0
 		};
+
+		this.onClick = this.onClick.bind(this);
 	}
 
 	componentDidMount() {
 		this.intervalKey = setInterval(() => {
 			this.animate();
 			this.props.onAnimate();
-		}, 1000/30);		
+		}, 1000/30);
 	}
 
 	componentWillUnmount() {
@@ -61,6 +63,10 @@ class Light extends Component {
 		});
 	}
 
+	onClick() {
+		this.props.onClick();
+	}
+
 	render() {
 		const style = {
 			position: 'absolute',
@@ -77,6 +83,7 @@ class Light extends Component {
 			<div
 				style={style}
 				data-test="light"
+				onClick={this.onClick}
 			/>
 		);
 	}
@@ -95,7 +102,8 @@ Light.defaultProps = {
 	'target-x': 0,
 	'target-y': 0,
 	
-	onAnimate: () => {}
+	onAnimate: () => {},
+	onClick: () => {}
 };
 
 Light.propTypes = {

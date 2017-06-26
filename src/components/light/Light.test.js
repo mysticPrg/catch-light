@@ -5,22 +5,38 @@ import Light from './Light';
 /*
 	최대 30개까지 만들 수 있고 독립적으로 동작할 수 있어야 함
 	최소 1/(30*2)초 안에 30개 모두의 연산이 끝나야 함
-	clickable
+	set fps
 	error check..
 */
 
 jest.useRealTimers();
 
-describe('Light', () => {
-
-	beforeEach(() => {
-		Light.displayName = Math.random().toString();
-	});
-
+describe.only('Light', () => {
 	it('should be render without crash', () => {
 		expect(() => {
 			shallow(<Light/>);
 		}).not.toThrow();
+	});
+
+	it('should be clickabled', () => {
+		const onClick = jasmine.createSpy();
+
+		const light = shallow(
+			<Light
+				onClick={onClick}
+			/>
+		);
+
+		light.simulate('click');
+
+		expect(onClick).toBeCalled();
+	});
+});
+
+describe('Light position', () => {
+
+	beforeEach(() => {
+		Light.displayName = Math.random().toString();
 	});
 
 	it('should have x and y values that are randomly initialized within a given range', () => {
@@ -123,7 +139,71 @@ describe('Light', () => {
 		);
 		expect(errSpy).toHaveBeenCalled();
 	});
+	
+	it('Each time animate is called, it must be close to the target', () => {
+		const target = {
+			x: 100,
+			y: 100
+		};
+		const min = 0;
+		const max = 500;
+		const repeatCount = 30;
+		
+		const getPos = () => {
+			const style = light.find('[data-test="light"]').props().style;
+			const px_filter = /([0-9\.]*)px/i;
+			const x = parseInt(px_filter.exec(style.left)[1]);
+			const y = parseInt(px_filter.exec(style.top)[1]);
+			return {x, y};
+		};
+		const getDist = (target, pos = getPos()) => ({
+			x: Math.abs(target.x*target.x - pos.x*pos.x),
+			y: Math.abs(target.y*target.y - pos.y*pos.y)
+		});
 
+		let repeat = 0;
+		let onAnimate = null;
+		const promise = new Promise(resolve => {
+			onAnimate = () => {
+				if ( repeat < repeatCount ) {
+					curDist = getDist(target);
+					expect(curDist.x).toBeLessThan(prevDist.x);
+					expect(curDist.y).toBeLessThan(prevDist.y);
+					repeat++;
+				} else {
+					resolve();
+				}
+			};
+		});
+		
+		const light = mount(
+			<Light
+				onAnimate={onAnimate}
+				target-x={target.x}
+				target-y={target.y}
+				x-min={min}
+				y-min={min}
+				x-max={max}
+				y-max={max}
+			/>
+		);
+
+		let prevDist = getDist(target);
+		let curDist = null;
+
+		promise.then(() => {
+			curDist = getDist(target);
+			expect(curDist.x).toBeLessThan(prevDist.x);
+			expect(curDist.y).toBeLessThan(prevDist.y);
+
+			light.unmount();
+		});
+
+		return promise;
+	});
+});
+
+describe('Light shape', () => {
 	it('should be show given color', () => {
 		const color = '#FF0000';
 		const light = shallow(
@@ -189,67 +269,5 @@ describe('Light', () => {
 		const result = style.borderRadius;
 
 		expect(result).toEqual('50%');
-	});
-	
-	it('Each time animate is called, it must be close to the target', () => {
-		const target = {
-			x: 100,
-			y: 100
-		};
-		const min = 0;
-		const max = 500;
-		const repeatCount = 30;
-		
-		const getPos = () => {
-			const style = light.find('[data-test="light"]').props().style;
-			const px_filter = /([0-9\.]*)px/i;
-			const x = parseInt(px_filter.exec(style.left)[1]);
-			const y = parseInt(px_filter.exec(style.top)[1]);
-			return {x, y};
-		};
-		const getDist = (target, pos = getPos()) => ({
-			x: Math.abs(target.x*target.x - pos.x*pos.x),
-			y: Math.abs(target.y*target.y - pos.y*pos.y)
-		});
-
-		let repeat = 0;
-		let onAnimate = null;
-		const promise = new Promise(resolve => {
-			onAnimate = () => {
-				if ( repeat < repeatCount ) {
-					curDist = getDist(target);
-					expect(curDist.x).toBeLessThan(prevDist.x);
-					expect(curDist.y).toBeLessThan(prevDist.y);
-					repeat++;
-				} else {
-					resolve();
-				}
-			};
-		});
-		
-		const light = mount(
-			<Light
-				onAnimate={onAnimate}
-				target-x={target.x}
-				target-y={target.y}
-				x-min={min}
-				y-min={min}
-				x-max={max}
-				y-max={max}
-			/>
-		);
-
-		let prevDist = getDist(target);
-		let curDist = null;
-
-		promise.then(() => {
-			curDist = getDist(target);
-			expect(curDist.x).toBeLessThan(prevDist.x);
-			expect(curDist.y).toBeLessThan(prevDist.y);
-
-			light.unmount();
-		});
-
-		return promise;
 	});
 });
