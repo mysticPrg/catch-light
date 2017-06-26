@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { getRandomNumber } from '~/utils/common';
-import { combineChecker, rangeCheck, compareWithOtherProps } from '~/utils/propTypeChecker';
+// import { getRandomNumber } from '~/utils/common';
+// import { combineChecker, rangeCheck, compareWithOtherProps } from '~/utils/propTypeChecker';
+import { getRandomNumber } from '../../utils/common';
+import { combineChecker, rangeCheck, compareWithOtherProps } from '../../utils/propTypeChecker';
 
 const rangeCheck0to1000 = rangeCheck(0, 1000);
 const compareWithMax = (min, max) => {
@@ -21,10 +23,29 @@ class Light extends Component {
 			x: getRandomNumber(props['x-min'], props['x-max']),
 			y: getRandomNumber(props['y-min'], props['y-max'])
 		};
+		
+		this.props.getAnimateCallback(this.animate.bind(this));
+	}
+	
+	animate() {
+		const speed = 0.15;
+		const x = this.state.x;
+		const y = this.state.y;
+		const next = {
+			...(this.state),
+			x: x + speed * (this.props['target-x'] - x),
+			y: y + speed * (this.props['target-y'] - y)
+		};
+		
+		this.setState({
+			x: parseFloat(next.x.toFixed(3)),
+			y: parseFloat(next.y.toFixed(3))
+		});
 	}
 
 	render() {
 		const style = {
+			position: 'absolute',
 			left: `${this.state.x}px`,
 			top: `${this.state.y}px`,
 			backgroundColor: this.props.color,
@@ -51,7 +72,12 @@ Light.defaultProps = {
 
 	color: '#FFFFFF',
 	size: 10,
-	alpha: 1.0
+	alpha: 1.0,
+	
+	'target-x': 0,
+	'target-y': 0,
+	
+	getAnimateCallback: () => {}
 };
 
 Light.propTypes = {

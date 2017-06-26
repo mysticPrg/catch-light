@@ -171,4 +171,51 @@ describe('Light', () => {
 
 		expect(result).toEqual('50%');
 	});
+	
+	it('Each time animate is called, it must be close to the target', () => {
+		let animate;
+		const getAnimateCallback = (cb) => {animate = cb;};
+		const target = {
+			x: 100,
+			y: 100
+		};
+		const min = 0;
+		const max = 500;
+		
+		const light = shallow(
+			<Light
+				getAnimateCallback={getAnimateCallback}
+				target-x={target.x}
+				target-y={target.y}
+				x-min={min}
+				y-min={min}
+				x-max={max}
+				y-max={max}
+			/>
+		);
+		const repeatCount = 30;
+		
+		const getPos = () => {
+			const style = light.find('[data-test="light"]').props().style;
+			const px_filter = /([0-9\.]*)px/i;
+			const x = parseInt(px_filter.exec(style.left)[1]);
+			const y = parseInt(px_filter.exec(style.top)[1]);
+			return {x, y};
+		};
+		const getDist = (target, pos = getPos()) => ({
+			x: Math.abs(target.x*target.x - pos.x*pos.x),
+			y: Math.abs(target.y*target.y - pos.y*pos.y)
+		});
+		
+		let prevDist = getDist(target);
+		let curDist = null;
+
+		for (let i=0 ; i<repeatCount ; i++ ) {
+			
+			animate();
+			curDist = getDist(target);
+			expect(curDist.x).toBeLessThan(prevDist.x);
+			expect(curDist.y).toBeLessThan(prevDist.y);
+		}
+	});
 });
