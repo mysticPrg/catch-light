@@ -18,9 +18,11 @@ describe('LightContainer', () => {
 		existLight.toRandomize();
 
 		state = {
-			lights: new Map([
-				[existLight.id, existLight]
-			])
+			light: {
+				lights: new Map([
+					[existLight.id, existLight]
+				])
+			}
 		};
 		store = fakeStore(state);
 		store.dispatch = actionSpy;
@@ -37,7 +39,7 @@ describe('LightContainer', () => {
 
 	it('should be render with store', () => {
 		expect(container.find(LightSpace).length).toEqual(1);
-		expect(container.find(Light).length).toEqual(state.lights.size);
+		expect(container.find(Light).length).toEqual(state.light.lights.size);
 	});
 
 	it('should be clickable', () => {

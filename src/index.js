@@ -20,19 +20,22 @@ const store = createStore(
 	composeWithDevTools(applyMiddleware(saga))
 );
 
-ReactDOM.render(
-	<Provider store={store}>
-		<LightContainer/>
-	</Provider>
-	, document.getElementById('root')
-);
-
-for ( let i=0 ; i<10 ; i++ ) {
+const addLight = () => {
 	let newLight = new LightModel();
 	newLight.toRandomize();
 
 	store.dispatch(light_created(newLight));
-}
+};
+
+ReactDOM.render(
+	<Provider store={store}>
+		<div>
+			<LightContainer/>
+			<button onClick={addLight}>Add new light!</button>
+		</div>
+	</Provider>
+	, document.getElementById('root')
+);
 
 saga.run(sagas);
 registerServiceWorker();
