@@ -49,7 +49,6 @@ spaceModule.add('Basic', () => {
 	}
 
 	const onLightClick = (id) => {
-		console.log(id);
 		action('click')(id);
 	}
 	return (
