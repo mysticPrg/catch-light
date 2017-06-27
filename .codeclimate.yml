@@ -9,3 +9,9 @@ exclude_paths:
   - "package.json"
   - "Readme.md"
   - "Dockerfile"
+
+engines:
+  eslint:
+    enabled: true
+    config:
+      config: .eslintrc
