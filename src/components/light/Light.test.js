@@ -2,11 +2,6 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import Light from './Light';
-/*
-	최대 30개까지 만들 수 있고 독립적으로 동작할 수 있어야 함
-	최소 1/(30*2)초 안에 30개 모두의 연산이 끝나야 함
-	error check..
-*/
 
 jest.useRealTimers();
 
@@ -31,7 +26,7 @@ describe('Light', () => {
 		expect(onClick).toBeCalled();
 	});
 
-	it('should be animated with given fps', () => {
+	it.concurrent('should be animated with given fps', () => {
 		const fps = 20;
 		const onAnimate = jasmine.createSpy();
 
@@ -47,6 +42,32 @@ describe('Light', () => {
 		promise.then(() => {
 			expect(onAnimate.calls.count()).toBeGreaterThanOrEqual(fps);
 			light.unmount();
+		});
+
+		return promise;
+	});
+
+	it.concurrent('more than 30 must work independently', () => {
+		const count = 30;
+		const fps = 30;
+		const onAnimate = jasmine.createSpy();
+
+		const lightArr = [];
+		for (let i=0 ; i<count ; i++ ) {
+			lightArr.push(mount(
+				<Light
+					onAnimate={onAnimate}
+					fps={fps}
+				/>
+			));
+		}
+
+		const promise = new Promise(resolve => setTimeout(resolve, 1060));
+		promise.then(() => {
+			expect(onAnimate.calls.count()).toBeGreaterThanOrEqual(fps*count);
+			for (let i=0 ; i<count ; i++ ) {
+				lightArr[i].unmount();
+			}
 		});
 
 		return promise;
@@ -160,7 +181,7 @@ describe('Light position', () => {
 		expect(errSpy).toHaveBeenCalled();
 	});
 	
-	it('Each time animate is called, it must be close to the target', () => {
+	it.concurrent('Each time animate is called, it must be close to the target', () => {
 		const target = {
 			x: 100,
 			y: 100
@@ -252,7 +273,7 @@ describe('Light shape', () => {
 		expect(height).toEqual(`${size}px`);
 	});
 
-	it('should be show given alpha with animate', () => {
+	it.concurrent('should be show given alpha with animate', () => {
 		const alpha = 0.5;
 		let loopCount = 0;
 		const onAnimate = jasmine.createSpy(() => loopCount++);
