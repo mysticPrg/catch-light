@@ -69,3 +69,14 @@ export function clone(obj) {
 	}
 	throw new Error('Unable to copy object! Its type isn\'t supported');
 };
+
+export const fakeStore = (state) => {
+	return {
+		default: () => {},
+		subscribe: () => {},
+		dispatch: () => {},
+		getState: () => {
+			return { ...state };
+		},
+	};
+};
