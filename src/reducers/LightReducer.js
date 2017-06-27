@@ -5,9 +5,10 @@ import {
 	LIGHT_INVOKE_REQUEST,
 	LIGHT_INVOKED
 } from '../actions/ActionTypes';
+import { clone } from '../utils/common';
 
 const initialState = {
-	lights: []
+	lights: new Map()
 };
 
 export default function LightReducer(state = initialState, action) {
@@ -25,8 +26,8 @@ export default function LightReducer(state = initialState, action) {
 				'target-x': action['target-x'],
 				'target-y': action['target-y'],
 			};
-			const newLights = lights.slice(0, lights.length);
-			newLights.push(newLight);
+			const newLights = clone(lights);
+			newLights.set(newLight.id, newLight);
 
 			return {
 				...state,
