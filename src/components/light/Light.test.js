@@ -105,8 +105,8 @@ describe('Light position', () => {
 		//then
 		const style = light.find('[data-test="light"]').props().style;
 		const px_filter = /([0-9]*)px/i;
-		const x_pos = parseInt(px_filter.exec(style.left)[1]);
-		const y_pos = parseInt(px_filter.exec(style.top)[1]);
+		const x_pos = parseInt(px_filter.exec(style.left)[1], 10);
+		const y_pos = parseInt(px_filter.exec(style.top)[1], 10);
 
 		expect(x_pos).toBeGreaterThanOrEqual(x_min);
 		expect(x_pos).toBeLessThan(x_max);
@@ -194,12 +194,13 @@ describe('Light position', () => {
 		const min = 0;
 		const max = 500;
 		const repeatCount = 30;
+		let light, prevDist, curDist;
 		
 		const getPos = () => {
 			const style = light.find('[data-test="light"]').props().style;
-			const px_filter = /([0-9\.]*)px/i;
-			const x = parseInt(px_filter.exec(style.left)[1]);
-			const y = parseInt(px_filter.exec(style.top)[1]);
+			const px_filter = /([0-9\.]*)px/i
+			const x = parseInt(px_filter.exec(style.left)[1], 10);
+			const y = parseInt(px_filter.exec(style.top)[1], 10);
 			return {x, y};
 		};
 		const getDist = (target, pos = getPos()) => ({
@@ -222,7 +223,7 @@ describe('Light position', () => {
 			};
 		});
 		
-		const light = mount(
+		light = mount(
 			<Light
 				onAnimate={onAnimate}
 				target-x={target.x}
@@ -234,8 +235,8 @@ describe('Light position', () => {
 			/>
 		);
 
-		let prevDist = getDist(target);
-		let curDist = null;
+		prevDist = getDist(target);
+		curDist = null;
 
 		promise.then(() => {
 			curDist = getDist(target);
@@ -307,9 +308,7 @@ describe('Light shape', () => {
 	});
 
 	it('should be show circle shape', () => {
-		const light = shallow(
-			<Light/>
-		);
+		const light = shallow(<Light/>);
 
 		const style = light.find('[data-test="light"]').props().style;
 		const result = style.borderRadius;
@@ -318,9 +317,7 @@ describe('Light shape', () => {
 	});
 
 	it('mouse cursor should be change to hand when hover', () => {
-		const light = shallow(
-			<Light/>
-		);
+		const light = shallow(<Light/>);
 
 		const style = light.find('[data-test="light"]').props().style;
 		const result = style.cursor;
