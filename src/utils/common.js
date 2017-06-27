@@ -2,7 +2,6 @@ export function getRandomNumber(min, max) {
 	return min + Math.floor(Math.random() * (max-min));
 };
 
-
 export function getFakeKey() {
 	let key = null;
 	do {
