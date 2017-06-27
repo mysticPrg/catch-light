@@ -1,4 +1,12 @@
+// System
 export const INIT_APP_REQUEST = 'INIT_APP_REQUEST';
 export const INIT_APP = 'INIT_APP';
 export const IN_PROGRESS = 'IN_PROGRESS';
 export const END_PROGRESS = 'END_PROGRESS';
+
+// Light
+export const LIGHT_CREATED			= 'LIGHT_CREATED';
+export const LIGHT_TARGET_CHANGED	= 'LIGHT_TARGET_CHANGED';
+export const LIGHT_REMOVED			= 'LIGHT_REMOVED';
+export const LIGHT_INVOKE_REQUEST	= 'LIGHT_INVOKE_REQUEST';
+export const LIGHT_INVOKED			= 'LIGHT_INVOKED';
