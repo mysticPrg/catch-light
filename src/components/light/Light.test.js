@@ -6,7 +6,7 @@ import { getFakeKey, getRandomColor } from '../../utils/common';
 
 jest.useRealTimers();
 
-const timer_margin = 100;
+const timer_margin = 500;
 
 describe('Light', () => {
 	it('should be rendered without crash', () => {
