@@ -15,3 +15,5 @@ export const in_progress = () => ({
 export const end_progress = () => ({
     type: types.END_PROGRESS
 });
+
+export * from './Light';
