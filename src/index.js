@@ -10,8 +10,9 @@ import LightContainer from './containers/LightContainer';
 import LightModel from './models/LightModel';
 import reducer from './reducers';
 import { light_created } from './actions/Light';
-
 import sagas from './sagas';
+import fakeSocket from './utils/fakeSocket';
+
 import registerServiceWorker from './registerServiceWorker';
 
 const saga = createSagaMiddleware();
@@ -19,6 +20,15 @@ const store = createStore(
 	reducer,
 	composeWithDevTools(applyMiddleware(saga))
 );
+
+const io = fakeSocket(300);
+io.on('connection', socket => {
+	//TODO: init client (set width/height, render, ...)
+
+	socket.on('msg', action => {
+		store.dispatch(action);
+	});
+});
 
 const addLight = () => {
 	let newLight = new LightModel();
