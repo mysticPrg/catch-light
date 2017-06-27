@@ -8,20 +8,17 @@ import {
 
 export const light_created = (light) => ({
 	type: LIGHT_CREATED,
-	id: light.id,
-	color: light.color,
-	size: light.size,
-	alpha: light.alpha,
-	speed: light.speed,
-	'target-x': light['target-x'],
-	'target-y': light['target-y'],
+	light: {
+		...light,
+		invoked: false
+	}
 });
 
 export const light_target_changed = (id, x, y) => ({
 	type: LIGHT_TARGET_CHANGED,
 	id: id,
-	'target-x': x,
-	'target-y': y
+	x: x,
+	y: y
 });
 
 export const light_removed = (id) => ({
