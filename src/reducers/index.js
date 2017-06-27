@@ -1,18 +1,6 @@
-import { INIT_APP } from '../actions/ActionTypes';
+import { combineReducers } from 'redux';
+import LightReducer from './LightReducer';
 
-const initialState = {
-	isInit: false
-};
-
-export default function myReducer(state = initialState, action) {
-	switch ( action.type ) {
-		case INIT_APP:
-			return {
-				...state,
-				isInit: true
-			};
-		
-		default:
-			return state;
-	}
-};
+export default combineReducers({
+	light: LightReducer
+});

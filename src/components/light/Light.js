@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 // import { getRandomNumber } from '~/utils/common';
 // import { combineChecker, rangeCheck, compareWithOtherProps } from '~/utils/propTypeChecker';
@@ -7,7 +6,6 @@ import { getRandomNumber } from '../../utils/common';
 import { combineChecker, rangeCheck, compareWithOtherProps } from '../../utils/propTypeChecker';
 
 const rangeCheck0to1000 = rangeCheck(0, 1000);
-let count = 0;
 const compareWithMax = (min, max, component) => {
 	if ( min > max ) {
 		return new Error(`${component}: Min(${min}) is greater than max(${max}).`);

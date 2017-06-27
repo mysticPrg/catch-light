@@ -21,7 +21,7 @@ class LightContainer extends Component {
 }
 
 const stateToProps = state => ({
-    lights: state.lights
+    lights: state.light.lights
 });
 
 const actionToProps = (dispatch, action) => ({

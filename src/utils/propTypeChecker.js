@@ -9,8 +9,8 @@ export function combineChecker(...checkers) {
 
 	return (...checkerArgs) => {
 		for ( let i=0 ; i<count ; i++ ) {
-			let err;
-			if ( err = checkers[i](...checkerArgs) ) {
+			let err = checkers[i](...checkerArgs);
+			if ( err ) {
 				return err;
 			}
 		}
@@ -31,7 +31,7 @@ export function rangeCheck(min, max) {
 	}
 
 	return (props, propName) => {
-		const value = parseInt(props[propName]);
+		const value = parseInt(props[propName], 10);
 
 		if ( isNaN(value) ) {
 			return new Error('Property value is not a number.');

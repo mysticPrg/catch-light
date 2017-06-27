@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import Light from './Light';
 
@@ -57,9 +56,5 @@ LightSpace.defaultProps = {
 	lights: [],
 	onLightClick: () => {}
 };
-
-// LightSpace.propTypes = {
-// 	count: PropTypes.number
-// };
 
 export default LightSpace;

@@ -1,26 +1,9 @@
-import { all, call, takeLatest, put } from 'redux-saga/effects';
-import * as types from '../actions/ActionTypes';
-import * as action from '../actions';
+import { all } from 'redux-saga/effects';
 
-import FakeServer from '../utils/fakeServer';
-
-export function* initApp() {
-    yield put(action.in_progress());
-    
-    const result = yield call(FakeServer.init_request);
-    if ( result ) {
-        yield put(action.init_app());
-    }
-    
-    yield put(action.end_progress());
-}
-
-function* handleInitAppReq() {
-    yield takeLatest(types.INIT_APP_REQUEST, initApp);
-}
+import LightSaga from './LightSaga';
 
 export default function* rootSaga() {
     yield all([
-        handleInitAppReq()
+        LightSaga()
     ]);
-}
+};
