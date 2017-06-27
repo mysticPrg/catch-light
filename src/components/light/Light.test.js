@@ -198,7 +198,7 @@ describe('Light position', () => {
 		
 		const getPos = () => {
 			const style = light.find('[data-test="light"]').props().style;
-			const px_filter = /([0-9\.]*)px/i
+			const px_filter = /([0-9.]*)px/i;
 			const x = parseInt(px_filter.exec(style.left)[1], 10);
 			const y = parseInt(px_filter.exec(style.top)[1], 10);
 			return {x, y};
