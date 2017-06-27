@@ -32,8 +32,9 @@ class LightSpace extends Component {
 					target-y={data['target-y']}
 					x-max={this.props.width}
 					y-max={this.props.height}
-					data-test="light"
+					speed={data.speed}
 					onClick={this.onLightClick}
+					data-test="light"
 				/>
 			);
 		});

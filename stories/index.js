@@ -8,7 +8,7 @@ import { action } from '@storybook/addon-actions';
 
 import Light from '../src/components/light/Light';
 import LightSpace from '../src/components/light/LightSpace';
-import { getRandomNumber, getFakeKey } from '../src/utils/common';
+import { getRandomNumber, getFakeKey, getRandomColor } from '../src/utils/common';
 
 const lightModule = storiesOf('Light', module);
 
@@ -40,11 +40,12 @@ spaceModule.add('Basic', () => {
 	for ( let i=0 ; i<count ; i++ ) {
 		lightArr.push({
 			id: getFakeKey(),
-			color: '#0000FF',
-			size: 20,
+			color: getRandomColor(),
+			size: getRandomNumber(10, 50),
 			alpha: Math.random(),
 			'target-x': getRandomNumber(0, width),
-			'target-y': getRandomNumber(0, height)
+			'target-y': getRandomNumber(0, height),
+			speed: Math.random()
 		});
 	}
 

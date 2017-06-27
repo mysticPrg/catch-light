@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import Light from './Light';
-import { getFakeKey } from '../../utils/common';
+import { getFakeKey, getRandomColor } from '../../utils/common';
 
 jest.useRealTimers();
 
@@ -251,7 +251,7 @@ describe('Light position', () => {
 
 describe('Light shape', () => {
 	it('should be show given color', () => {
-		const color = '#FF0000';
+		const color = getRandomColor();
 		const light = shallow(
 			<Light
 				color={color}

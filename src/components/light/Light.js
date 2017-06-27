@@ -28,6 +28,7 @@ class Light extends Component {
 
 		this.onClick = this.onClick.bind(this);
 		this.alphaAddFactor = 1.0 / (this.props.fps - 0.01);
+		this.speed = 0.15 * this.props.speed;
 	}
 
 	componentDidMount() {
@@ -42,13 +43,12 @@ class Light extends Component {
 	}
 	
 	animate() {
-		const speed = 0.15;
 		const x = this.state.x;
 		const y = this.state.y;
 		const next = {
 			alpha: this.state.alpha + this.alphaAddFactor,
-			x: x + speed * (this.props['target-x'] - x),
-			y: y + speed * (this.props['target-y'] - y)
+			x: x + this.speed * (this.props['target-x'] - x),
+			y: y + this.speed * (this.props['target-y'] - y)
 		};
 
 		if ( next.alpha > this.props.alpha ) {
@@ -67,6 +67,7 @@ class Light extends Component {
 	}
 
 	render() {
+		this.speed = 0.15 * this.props.speed;
 		const style = {
 			position: 'absolute',
 			left: `${this.state.x}px`,
@@ -99,6 +100,7 @@ Light.defaultProps = {
 	size: 10,
 	alpha: 1.0,
 	fps: 30,
+	speed: 1.0,
 	
 	'target-x': 0,
 	'target-y': 0,
