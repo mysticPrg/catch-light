@@ -5,7 +5,7 @@ import {
 	LIGHT_INVOKED
 } from '../actions/ActionTypes';
 import { clone } from '../utils/common';
-import { LightModel } from '../models/LightModel';
+import LightModel from '../models/LightModel';
 
 const initialState = {
 	lights: new Map()

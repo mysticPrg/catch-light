@@ -1,5 +1,5 @@
 import LightReducer from './LightReducer';
-import { LightModel } from '../models/LightModel';
+import LightModel from '../models/LightModel';
 import {
 	light_created,
 	light_target_changed,

@@ -4,7 +4,7 @@ import {
 	getRandomColor,
 } from '../utils/common';
 
-export class LightModel {
+export default class LightModel {
 	constructor({
 		id = 0,
 		color = '#000000',
@@ -26,13 +26,13 @@ export class LightModel {
 		this.invoked = invoked;
 	}
 
-	toRandomize() {
+	toRandomize(width = 500, height = 500) {
 		this.id = getFakeKey();
 		this.color = getRandomColor();
 		this.size = getRandomNumber(10, 50);
 		this.alpha = Math.random();
 		this.speed = Math.random();
-		this['target-x'] = getRandomNumber(0, 500);
-		this['target-y'] = getRandomNumber(0, 500);
+		this['target-x'] = getRandomNumber(0, width);
+		this['target-y'] = getRandomNumber(0, height);
 	}
 };
