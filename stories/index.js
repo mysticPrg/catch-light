@@ -4,17 +4,54 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
+// import { linkTo } from '@storybook/addon-links';
 
-import Button from './Button';
-import Welcome from './Welcome';
+import Light from '../src/components/light/Light';
+import LightSpace from '../src/components/light/LightSpace';
+import LightModel from '../src/models/LightModel';
 
-storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
+const lightModule = storiesOf('Light', module);
 
-storiesOf('Button', module)
-  .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
-  .add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
-  
-import Hello from '../src/components/Hello';
-import { INIT_APP } from '../src/actions/ActionTypes';
-storiesOf('MyApp', module).add('Hello', () => <Hello onClick={action(INIT_APP)}/>);
+lightModule.add('Basic', () => {
+	const min = 0;
+	const max = 200;
+
+	return (
+		<Light
+			color="#FF0000"
+			alpha="0.5"
+			size="20"
+			x-min={min}
+			x-max={max}
+			y-min={min}
+			y-max={max}
+			onClick={action('click')}
+		/>
+	);
+});
+
+const spaceModule = storiesOf('LightSpace', module);
+
+spaceModule.add('Basic', () => {
+	const width = 500;
+	const height = 500;
+	const count = 30;
+	const lightArr = [];
+	for ( let i=0 ; i<count ; i++ ) {
+		let model = new LightModel();
+		model.toRandomize(width, height);
+		lightArr.push(model);
+	}
+
+	const onLightClick = (id) => {
+		action('click')(id);
+	}
+	return (
+		<LightSpace
+			lights={lightArr}
+			width={width}
+			height={height}
+			onLightClick={onLightClick}
+		/>
+	);
+});
