@@ -2,8 +2,11 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import Light from './Light';
+import { getFakeKey } from '../../utils/common';
 
 jest.useRealTimers();
+
+const timer_margin = 100;
 
 describe('Light', () => {
 	it('should be rendered without crash', () => {
@@ -14,16 +17,18 @@ describe('Light', () => {
 
 	it('should be clickabled', () => {
 		const onClick = jasmine.createSpy();
+		const id = getFakeKey();
 
 		const light = shallow(
 			<Light
+				id={id}
 				onClick={onClick}
 			/>
 		);
 
 		light.simulate('click');
 
-		expect(onClick).toBeCalled();
+		expect(onClick).toHaveBeenCalledWith(id);
 	});
 
 	it.concurrent('should be animated with given fps', () => {
@@ -37,7 +42,7 @@ describe('Light', () => {
 			/>
 		);
 
-		const promise = new Promise(resolve => setTimeout(resolve, 1050));
+		const promise = new Promise(resolve => setTimeout(resolve, 1000 + timer_margin));
 
 		promise.then(() => {
 			expect(onAnimate.calls.count()).toBeGreaterThanOrEqual(fps);
@@ -62,7 +67,7 @@ describe('Light', () => {
 			));
 		}
 
-		const promise = new Promise(resolve => setTimeout(resolve, 1060));
+		const promise = new Promise(resolve => setTimeout(resolve, 1000 + timer_margin));
 		promise.then(() => {
 			expect(onAnimate.calls.count()).toBeGreaterThanOrEqual(fps*count);
 			for (let i=0 ; i<count ; i++ ) {
@@ -290,7 +295,7 @@ describe('Light shape', () => {
 		expect(result).toEqual(0);
 
 		return new Promise(resolve => {
-			setTimeout(resolve, 1000);
+			setTimeout(resolve, 1000 + timer_margin);
 		}).then(() => {
 			expect(onAnimate).toBeCalled();
 			style = light.find('[data-test="light"]').props().style;

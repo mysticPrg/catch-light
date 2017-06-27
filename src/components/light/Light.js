@@ -63,7 +63,7 @@ class Light extends Component {
 	}
 
 	onClick() {
-		this.props.onClick();
+		this.props.onClick(this.props.id);
 	}
 
 	render() {
@@ -104,7 +104,9 @@ Light.defaultProps = {
 	'target-y': 0,
 	
 	onAnimate: () => {},
-	onClick: () => {}
+	onClick: () => {},
+
+	id: undefined
 };
 
 Light.propTypes = {
