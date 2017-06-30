@@ -32,6 +32,30 @@ export function getRandomColor() {
 	return `#${r}${g}${b}`;
 };
 
+const CharCode = {
+	a: 'a'.charCodeAt(0),
+	z: 'z'.charCodeAt(0),
+	A: 'A'.charCodeAt(0),
+	Z: 'Z'.charCodeAt(0),
+}
+export function getRandomCharacter() {
+	let charCode;
+	do {
+		charCode = getRandomNumber(CharCode.a, CharCode.Z);
+	} while ( charCode > CharCode.z && charCode < CharCode.A );
+
+	return String.fromCharCode(charCode);
+};
+
+export function getRandomString(length = 10) {
+	const result = [];
+	for (let i=0 ; i<length ; i++ ) {
+		result.push(getRandomCharacter());
+	}
+
+	return result.join('');
+};
+
 export function clone(obj) {
 	let copy;
 
