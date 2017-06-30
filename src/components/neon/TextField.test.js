@@ -29,12 +29,12 @@ describe('TextField', () => {
 			<TextField placeholder={placeholder}/>
 		);
 
-		const readData = target.find('input').props().placeholder;
+		const readData = target.find('[data-test="placeholder"]');
 		expect(readData).toEqual(placeholder);
 	});
 
 	it('should have the light on if it has focus');
-	it('should disappear if the TextField has focus');
+	it('placeholder should disappear if the TextField has focus');
 	it('should display the text when it is typed');
 	it('should call the registered handler when the mouse event occurs');
 	it('should call the registered handler when the keyboard event occurs');
