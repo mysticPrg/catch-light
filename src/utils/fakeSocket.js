@@ -1,5 +1,5 @@
-import { light_created } from '../actions/Light';
-import LightModel from '../models/LightModel';
+import { light_created } from '~/actions/Light';
+import LightModel from '~/models/LightModel';
 
 function makeAsyncFunc(func, wait) {
 	return (...args) => {

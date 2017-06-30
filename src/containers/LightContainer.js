@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import LightSpace from '../components/light/LightSpace';
+import LightSpace from '~/components/light/LightSpace';
 import { connect } from 'react-redux';
-import { light_invoke_request } from '../actions/Light';
+import { light_invoke_request } from '~/actions/Light';
 
 class LightContainer extends Component {
 	render() {

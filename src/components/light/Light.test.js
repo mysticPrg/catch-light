@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import Light from './Light';
-import { getFakeKey, getRandomColor } from '../../utils/common';
+import { getFakeKey, getRandomColor } from '~/utils/common';
 
 jest.useRealTimers();
 

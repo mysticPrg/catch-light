@@ -1,14 +1,14 @@
 import LightReducer from './LightReducer';
-import LightModel from '../models/LightModel';
+import LightModel from '~/models/LightModel';
 import {
 	light_created,
 	light_target_changed,
 	light_removed,
 	light_invoked
-} from '../actions';
+} from '~/actions';
 import { 
 	getRandomNumber
-} from '../utils/common';
+} from '~/utils/common';
 
 describe('LightReducer', () => {
 	let existLight = null;

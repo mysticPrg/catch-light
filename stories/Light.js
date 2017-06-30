@@ -6,9 +6,9 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { linkTo } from '@storybook/addon-links';
 
-import Light from '../src/components/light/Light';
-import LightSpace from '../src/components/light/LightSpace';
-import LightModel from '../src/models/LightModel';
+import Light from '~/src/components/light/Light';
+import LightSpace from '~/src/components/light/LightSpace';
+import LightModel from '~/src/models/LightModel';
 
 const lightModule = storiesOf('Light', module);
 

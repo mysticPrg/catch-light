@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
-// import { getRandomNumber } from '~/utils/common';
-// import { combineChecker, rangeCheck, compareWithOtherProps } from '~/utils/propTypeChecker';
-import { getRandomNumber } from '../../utils/common';
-import { combineChecker, rangeCheck, compareWithOtherProps } from '../../utils/propTypeChecker';
+import { getRandomNumber } from '~/utils/common';
+import { combineChecker, rangeCheck, compareWithOtherProps } from '~/utils/propTypeChecker';
 
 const rangeCheck0to1000 = rangeCheck(0, 1000);
 const compareWithMax = (min, max, component) => {

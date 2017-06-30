@@ -1,6 +1,6 @@
 import { all, takeEvery, put } from 'redux-saga/effects';
-import * as types from '../actions/ActionTypes';
-import * as actions from '../actions';
+import * as types from '~/actions/ActionTypes';
+import * as actions from '~/actions';
 
 function* invokeRequest(action) {
 	yield put(actions.in_progress());

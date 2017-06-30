@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import LightSpace from './LightSpace';
-import { getRandomNumber, getFakeKey } from '../../utils/common';
+import { getRandomNumber, getFakeKey } from '~/utils/common';
 
 describe('LightSpace', () => {
 	it('should be render without crash', () => {

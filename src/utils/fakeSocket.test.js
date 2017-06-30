@@ -1,5 +1,5 @@
 import fakeSocket, { Socket } from './fakeSocket';
-import { LIGHT_CREATED } from '../actions/ActionTypes';
+import { LIGHT_CREATED } from '~/actions/ActionTypes';
 
 jest.useRealTimers();
 
