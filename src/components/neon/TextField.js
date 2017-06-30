@@ -5,7 +5,8 @@ class TextField extends Component {
 		return (
 			<div>
 				<div></div>
-				<input type="text"/>
+				
+				<input type="text" value={this.props.children}/>
 			</div>
 		);
 	}
