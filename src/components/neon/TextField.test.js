@@ -13,7 +13,6 @@ describe('TextField', () => {
 
 	it('should be initialized to the input value', () => {
 		const inputValue = getRandomString(20);
-		console.log(inputValue);
 
 		const target = shallow(
 			<TextField>{inputValue}</TextField>
@@ -23,7 +22,17 @@ describe('TextField', () => {
 		expect(readData).toEqual(inputValue);
 	});
 
-	it('should represent a placeholder when not focused');
+	it('should represent a placeholder when not focused', () => {
+		const placeholder = getRandomString(20);
+
+		const target = shallow(
+			<TextField placeholder={placeholder}/>
+		);
+
+		const readData = target.find('input').props().placeholder;
+		expect(readData).toEqual(placeholder);
+	});
+
 	it('should have the light on if it has focus');
 	it('should disappear if the TextField has focus');
 	it('should display the text when it is typed');
