@@ -6,11 +6,15 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { linkTo } from '@storybook/addon-links';
 
+import backgroundColor from 'react-storybook-decorator-background';
+
 import Light from '~/components/light/Light';
 import LightSpace from '~/components/light/LightSpace';
 import LightModel from '~/models/LightModel';
 
 const lightModule = storiesOf('Light', module);
+
+lightModule.addDecorator(backgroundColor(['#000000', '#ffffff']));
 
 lightModule.add('Basic', () => {
 	const min = 0;
