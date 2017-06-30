@@ -41,8 +41,8 @@ const CharCode = {
 export function getRandomCharacter() {
 	let charCode;
 	do {
-		charCode = getRandomNumber(CharCode.a, CharCode.Z);
-	} while ( charCode > CharCode.z && charCode < CharCode.A );
+		charCode = getRandomNumber(CharCode.A, CharCode.z);
+	} while ( charCode > CharCode.Z && charCode < CharCode.a );
 
 	return String.fromCharCode(charCode);
 };
