@@ -19,7 +19,7 @@ neonModule.add('TextField', () => {
 	return (
 		<div>
 			<TextField placeholder="Neon TextField" style={style}/>
-			<TextField placeholder="Neon TextField2"/>
+			<TextField placeholder="Neon TextField2">This is TextField</TextField>
 		</div>
 	);
 

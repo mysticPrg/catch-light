@@ -3,14 +3,29 @@ import React, { Component } from 'react';
 import './Neon.css';
 import './TextField.css';
 
+/*
+	ToDo 
+	0. Create and extends Neon component (for common props like color)
+	1. use mainColor, subColor,
+	2. use rem (for flexible UI)
+	3. send value data to parent
+	4. event handler
+*/
+
 class TextField extends Component {
 	constructor(props) {
 		super(props);
+
+		let value = '';
+		if ( props.children ) {
+			value = props.children;
+		}
+
 		this.state = {
-			value: '',
+			value,
 			focus: false
 		};
-		
+
 		const style = this.props.style;
 		style.width = style.width === 0 ? 0 : style.width || '300px';
 
@@ -19,23 +34,25 @@ class TextField extends Component {
 		this.onChange = this.onChange.bind(this);
 	}
 
-	onFocus() {
+	onFocus(e) {
 		this.setState({
 			focus: true
 		});
+		this.props.onFocus(e);
 	}
 
-	onBlur() {
+	onBlur(e) {
 		this.setState({
 			focus: false
 		});
+		this.props.onBlur(e);
 	}
 
 	onChange(e) {
-		const value = e.target.value;
 		this.setState({
 			value: e.target.value
 		});
+		this.props.onChange(e);
 	}
 
 	render() {
@@ -49,7 +66,7 @@ class TextField extends Component {
 				<input
 					className={`TextField__input ${this.state.focus ? 'TextField__input-focus' : ''}`}
 					type="text"
-					value={this.props.children}
+					value={this.state.value}
 					onFocus={this.onFocus}
 					onBlur={this.onBlur}
 					onChange={this.onChange}
@@ -62,6 +79,9 @@ class TextField extends Component {
 TextField.defaultProps = {
 	placeholder: "",
 	style: {},
+	onFocus: () => {},
+	onBlur: () => {},
+	onChange: () => {}
 };
 
 export default TextField;

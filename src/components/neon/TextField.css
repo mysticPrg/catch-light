@@ -15,7 +15,7 @@
 	background-color: transparent;
 	box-shadow: none;
 	transition: box-shadow 0.3s;
-	border-radius: 7px;
+	border-radius: 5px;
 }
 
 .TextField__input-focus {
