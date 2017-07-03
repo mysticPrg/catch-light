@@ -8,8 +8,6 @@ import './TextField.css';
 	0. Create and extends Neon component (for common props like color)
 	1. use mainColor, subColor,
 	2. use rem (for flexible UI)
-	3. send value data to parent
-	4. event handler
 */
 
 class TextField extends Component {
@@ -34,25 +32,24 @@ class TextField extends Component {
 		this.onChange = this.onChange.bind(this);
 	}
 
-	onFocus(e) {
+	onFocus() {
 		this.setState({
 			focus: true
 		});
-		this.props.onFocus(e);
+		this.props.onFocus(this);
 	}
 
-	onBlur(e) {
+	onBlur() {
 		this.setState({
 			focus: false
 		});
-		this.props.onBlur(e);
+		this.props.onBlur(this);
 	}
 
 	onChange(e) {
-		this.setState({
-			value: e.target.value
-		});
-		this.props.onChange(e);
+		const value = e.target.value;
+		this.setState({ value });
+		this.props.onChange(value);
 	}
 
 	render() {

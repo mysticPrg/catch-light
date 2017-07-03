@@ -115,8 +115,6 @@ describe('TextField', () => {
 		const input = target.find('input');
 
 		input.simulate('change', event);
-		expect(changeHandler).toHaveBeenCalled();
-
-		expect(changeHandler.calls.first().args[0].target.value).toEqual(event.target.value);
+		expect(changeHandler).toHaveBeenCalledWith(value);
 	});
 });
