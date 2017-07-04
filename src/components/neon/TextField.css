@@ -18,9 +18,18 @@
 	border-radius: 5px;
 }
 
-.TextField__input-focus {
+.TextField__input:focus, .TextField__input:hover {
 	box-shadow: 0 0 18px 3px #00BCD4;
 }
+
+.TextField__input:active {
+	box-shadow: 0 0 18px 3px white;
+	transition: box-shadow 0.1s;
+}
+
+/*.TextField__input-focus {
+	box-shadow: 0 0 18px 3px #00BCD4;
+}*/
 
 .TextField__label {
 	font: 13px Arial;

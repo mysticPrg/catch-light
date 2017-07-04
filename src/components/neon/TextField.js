@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import './Neon.css';
 import './TextField.css';
 
 /*
@@ -20,8 +19,7 @@ class TextField extends Component {
 		}
 
 		this.state = {
-			value,
-			focus: false
+			value
 		};
 
 		const style = this.props.style;
@@ -33,16 +31,10 @@ class TextField extends Component {
 	}
 
 	onFocus() {
-		this.setState({
-			focus: true
-		});
 		this.props.onFocus(this);
 	}
 
 	onBlur() {
-		this.setState({
-			focus: false
-		});
 		this.props.onBlur(this);
 	}
 
@@ -61,7 +53,7 @@ class TextField extends Component {
 					{this.props.placeholder}
 				</label>
 				<input
-					className={`TextField__input ${this.state.focus ? 'TextField__input-focus' : ''}`}
+					className="TextField__input"
 					type="text"
 					value={this.state.value}
 					onFocus={this.onFocus}

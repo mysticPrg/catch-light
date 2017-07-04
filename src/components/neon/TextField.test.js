@@ -33,7 +33,7 @@ describe('TextField', () => {
 		expect(readData).toEqual(placeholder);
 	});
 
-	it('should have the light on if it has focus', () => {
+	it.skip('should have the light on if it has focus', () => {
 		const target = mount(
 			<TextField/>
 		);
