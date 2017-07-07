@@ -5,11 +5,11 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import backgroundColor from 'react-storybook-decorator-background';
 
-// import TextField from '~/components/neon/TextField';
-// import Button from '~/components/neon/Button';
-import { TextField, Button } from '~/components/neon';
-
-console.log(Button)
+import { 
+	TextField,
+	Button,
+	CheckBox
+} from '~/components/neon';
 
 const neonModule = storiesOf('Neon', module);
 
@@ -28,5 +28,11 @@ neonModule.add('TextField', () => {
 neonModule.add('Button', () => {
 	return (
 		<Button>This is Button</Button>
+	);
+});
+
+neonModule.add('CheckBox', () => {
+	return (
+		<CheckBox>Check Box</CheckBox>
 	);
 });
