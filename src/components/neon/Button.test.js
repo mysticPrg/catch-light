@@ -21,6 +21,13 @@ describe('TextField', () => {
 		expect(value).toEqual(inputValue);
 	});
 
-	it('should have the light on if it has focus');
-	it('should call the registered handler when the change event occurs');
+	it('should call the registered handler when the click event occurs', () => {
+		const onClick = jasmine.createSpy();
+
+		const target = shallow(<Button onClick={onClick}/>);
+
+		target.simulate('click');
+
+		expect(onClick).toHaveBeenCalled();
+	});
 });

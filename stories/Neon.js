@@ -13,25 +13,17 @@ const neonModule = storiesOf('Neon', module);
 neonModule.addDecorator(backgroundColor(['#000000', '#ffffff']));
 
 neonModule.add('TextField', () => {
-	const style = {
-		width: '250px'
-	};
-
 	return (
 		<div>
-			<TextField placeholder="Neon TextField" style={style}/>
-			<TextField placeholder="Neon TextField2">This is TextField</TextField>
+			<TextField placeholder="Neon TextField"/>
+			<TextField placeholder="Neon TextField2" defaultValue="This is default value"/>
 		</div>
 	);
 
 });
 
 neonModule.add('Button', () => {
-	const style = {
-		width: '250px'
-	};
-
 	return (
-		<Button style={style}>This is Button</Button>
+		<Button>This is Button</Button>
 	);
 });

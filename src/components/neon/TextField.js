@@ -1,76 +1,44 @@
 import React, { Component } from 'react';
-
-import './TextField.css';
+import styled from 'styled-components';
 
 /*
 	ToDo 
-	0. Create and extends Neon component (for common props like color)
-	1. use mainColor, subColor,
+	1. use theme
 	2. use rem (for flexible UI)
 */
 
-class TextField extends Component {
-	constructor(props) {
-		super(props);
+const TextField = styled.input`
+	margin: 7px;
+	font: 13px Arial;
+	order: 0;
+	padding: 5px;
+	display: block;
+	color: #00BCD4;
+	outline: none;
+	border: 1px solid #56ffd8;
+	background-color: transparent;
+	box-shadow: none;
+	transition: box-shadow 0.3s;
+	border-radius: 5px;
 
-		let value = '';
-		if ( props.children ) {
-			value = props.children;
-		}
-
-		this.state = {
-			value
-		};
-
-		const style = this.props.style;
-		style.width = style.width === 0 ? 0 : style.width || '300px';
-
-		this.onFocus = this.onFocus.bind(this);
-		this.onBlur = this.onBlur.bind(this);
-		this.onChange = this.onChange.bind(this);
+	&:focus, &:hover {
+		box-shadow: 0 0 18px 3px #00BCD4;
 	}
 
-	onFocus() {
-		this.props.onFocus(this);
+	&:active {
+		box-shadow: 0 0 18px 3px white;
 	}
 
-	onBlur() {
-		this.props.onBlur(this);
+	&::placeholder {
+		font: 13px Arial;
+		color: rgba(0, 188, 212, 0.8);
+		opacity: 1;
+		transition: opacity 0.5s;
 	}
 
-	onChange(e) {
-		const value = e.target.value;
-		this.setState({ value });
-		this.props.onChange(value);
+	&:focus::placeholder {
+		opacity: 0;
 	}
-
-	render() {
-		return (
-			<div className="TextField" style={this.props.style}>
-				<label
-					className={`TextField__label ${this.state.value ? 'TextField__label-hide' : ''}`}
-				>
-					{this.props.placeholder}
-				</label>
-				<input
-					className="TextField__input"
-					type="text"
-					value={this.state.value}
-					onFocus={this.onFocus}
-					onBlur={this.onBlur}
-					onChange={this.onChange}
-				/>
-			</div>
-		);
-	}
-}
-
-TextField.defaultProps = {
-	placeholder: "",
-	style: {},
-	onFocus: () => {},
-	onBlur: () => {},
-	onChange: () => {}
-};
+`;
 
 export default TextField;
