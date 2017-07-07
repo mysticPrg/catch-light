@@ -7,7 +7,7 @@ import styled from 'styled-components';
 	2. use rem (for flexible UI)
 */
 
-const TextField = styled.input`
+export const TextField = styled.input`
 	margin: 7px;
 	font: 13px Arial;
 	order: 0;

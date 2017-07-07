@@ -5,8 +5,11 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import backgroundColor from 'react-storybook-decorator-background';
 
-import TextField from '~/components/neon/TextField';
-import Button from '~/components/neon/Button';
+// import TextField from '~/components/neon/TextField';
+// import Button from '~/components/neon/Button';
+import { TextField, Button } from '~/components/neon';
+
+console.log(Button)
 
 const neonModule = storiesOf('Neon', module);
 

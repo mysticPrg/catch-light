@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const Button = styled.button`
+export const Button = styled.button`
 	font: 13px Arial;
 	color: #00BCD4;
 	background-color: rgba(0, 188, 212, 0.45);
