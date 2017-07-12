@@ -3,11 +3,11 @@ import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 
 import LightContainer from './LightContainer';
-import LightSpace from '../components/light/LightSpace';
-import Light from '../components/light/Light';
-import LightModel from '../models/LightModel';
-import { fakeStore } from '../utils/common';
-import { light_invoke_request } from '../actions/Light';
+import LightSpace from '~/components/light/LightSpace';
+import Light from '~/components/light/Light';
+import LightModel from '~/models/LightModel';
+import { fakeStore } from '~/utils/common';
+import { light_invoke_request } from '~/actions/Light';
 
 describe('LightContainer', () => {
 	let existLight, state, store, container;

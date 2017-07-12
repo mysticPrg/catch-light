@@ -2,7 +2,6 @@ export function getRandomNumber(min, max) {
 	return min + Math.floor(Math.random() * (max-min));
 };
 
-
 export function getFakeKey() {
 	let key = null;
 	do {
@@ -31,6 +30,30 @@ export function getRandomColor() {
 	}
 
 	return `#${r}${g}${b}`;
+};
+
+const CharCode = {
+	a: 'a'.charCodeAt(0),
+	z: 'z'.charCodeAt(0),
+	A: 'A'.charCodeAt(0),
+	Z: 'Z'.charCodeAt(0),
+}
+export function getRandomCharacter() {
+	let charCode;
+	do {
+		charCode = getRandomNumber(CharCode.A, CharCode.z);
+	} while ( charCode > CharCode.Z && charCode < CharCode.a );
+
+	return String.fromCharCode(charCode);
+};
+
+export function getRandomString(length = 10) {
+	const result = [];
+	for (let i=0 ; i<length ; i++ ) {
+		result.push(getRandomCharacter());
+	}
+
+	return result.join('');
 };
 
 export function clone(obj) {

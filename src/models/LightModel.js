@@ -2,7 +2,7 @@ import {
 	getRandomNumber,
 	getFakeKey,
 	getRandomColor,
-} from '../utils/common';
+} from '~/utils/common';
 
 export default class LightModel {
 	constructor({

@@ -1,6 +1,6 @@
 const defaultWait = 1000;
 
-function makeAsyncFunc(func, wait = 0) {
+function makeAsyncFunc(func, wait = defaultWait) {
 	return (...args) => {
 		return new Promise(resolve => {
 			if ( wait <= 0 ) {

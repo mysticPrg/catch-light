@@ -1,7 +1,7 @@
 import { initApp } from './index';
-import { in_progress, init_app, end_progress } from '../actions';
+import { in_progress, init_app, end_progress } from '~/actions';
 import { put, call } from 'redux-saga/effects';
-import FakeServer from '../utils/fakeServer';
+import FakeServer from '~/utils/fakeServer';
 
 describe.skip('initApp saga', () => {
 	it('can be initiating between in_progress and end_progress', () => {
