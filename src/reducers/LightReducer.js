@@ -1,8 +1,8 @@
 import {
-	LIGHT_CREATED,
-	LIGHT_TARGET_CHANGED,
-	LIGHT_REMOVED,
-	LIGHT_INVOKED
+	LIGHT_CREATE,
+	LIGHT_TARGET_CHANGE,
+	LIGHT_REMOVE,
+	LIGHT_INVOKE
 } from '~/actions/ActionTypes';
 import { clone } from '~/utils/common';
 import LightModel from '~/models/LightModel';
@@ -16,7 +16,7 @@ export default function LightReducer(state = initialState, action) {
 	const lights = state.lights;
 
 	switch ( action.type ) {
-		case LIGHT_CREATED: {
+		case LIGHT_CREATE: {
 			let newLight = new LightModel({
 				...action.light,
 				target_x: action.light['target-x'],
@@ -31,7 +31,7 @@ export default function LightReducer(state = initialState, action) {
 			};
 		}
 
-		case LIGHT_TARGET_CHANGED: {
+		case LIGHT_TARGET_CHANGE: {
 			if ( !lights.has(action.id) ) {
 				return state;
 			}
@@ -47,7 +47,7 @@ export default function LightReducer(state = initialState, action) {
 			};
 		}
 
-		case LIGHT_REMOVED: {
+		case LIGHT_REMOVE: {
 			if ( !lights.has(action.id) ) {
 				return state;
 			}
@@ -60,7 +60,7 @@ export default function LightReducer(state = initialState, action) {
 			};
 		}
 
-		case LIGHT_INVOKED: {
+		case LIGHT_INVOKE: {
 			if ( !lights.has(action.id) ) {
 				return state;
 			}

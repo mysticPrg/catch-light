@@ -9,11 +9,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import LightContainer from './containers/LightContainer';
 import LightModel from './models/LightModel';
 import reducer from './reducers';
-import { light_created } from './actions/Light';
+import { light_create } from './actions/Light';
 import sagas from './sagas';
 import fakeSocket from './utils/fakeSocket';
 
 import registerServiceWorker from './registerServiceWorker';
+
+import './index.css';
 
 const saga = createSagaMiddleware();
 const store = createStore(
@@ -34,7 +36,7 @@ const addLight = () => {
 	let newLight = new LightModel();
 	newLight.toRandomize();
 
-	store.dispatch(light_created(newLight));
+	store.dispatch(light_create(newLight));
 };
 
 ReactDOM.render(

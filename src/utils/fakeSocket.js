@@ -1,4 +1,4 @@
-import { light_created } from '~/actions/Light';
+import { light_create } from '~/actions/Light';
 import LightModel from '~/models/LightModel';
 
 function makeAsyncFunc(func, wait) {
@@ -27,7 +27,7 @@ export class Socket {
 				for ( let i=0 ; i<10 ; i++ ) {
 					let model = new LightModel();
 					model.toRandomize(500, 500);
-					callback(light_created(model));
+					callback(light_create(model));
 				}
 
 				break;

@@ -5,8 +5,13 @@ export const IN_PROGRESS = 'IN_PROGRESS';
 export const END_PROGRESS = 'END_PROGRESS';
 
 // Light
-export const LIGHT_CREATED			= 'LIGHT_CREATED';
-export const LIGHT_TARGET_CHANGED	= 'LIGHT_TARGET_CHANGED';
-export const LIGHT_REMOVED			= 'LIGHT_REMOVED';
-export const LIGHT_INVOKE_REQUEST	= 'LIGHT_INVOKE_REQUEST';
-export const LIGHT_INVOKED			= 'LIGHT_INVOKED';
+export const LIGHT_CREATE			= 'LIGHT_CREATE';
+export const LIGHT_TARGET_CHANGE	= 'LIGHT_TARGET_CHANGE';
+export const LIGHT_REMOVE			= 'LIGHT_REMOVE';
+export const LIGHT_INVOKE			= 'LIGHT_INVOKE';
+
+export const LIGHT_REQUEST_INVOKE	= 'LIGHT_REQUEST_INVOKE';
+
+// Card
+export const CARD_OPEN				= 'CARD_OPEN';
+export const CARD_CREATE			= 'CARD_CREATE';

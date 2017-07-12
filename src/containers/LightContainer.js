@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import LightSpace from '~/components/light/LightSpace';
 import { connect } from 'react-redux';
-import { light_invoke_request } from '~/actions/Light';
+import { light_request_invoke } from '~/actions/Light';
 
 class LightContainer extends Component {
 	render() {
@@ -25,7 +25,7 @@ const stateToProps = state => ({
 });
 
 const actionToProps = (dispatch, action) => ({
-    onLightClick: (key) => dispatch(light_invoke_request(key))
+    onLightClick: (key) => dispatch(light_request_invoke(key))
 });
 
 export default connect(stateToProps, actionToProps)(LightContainer);
